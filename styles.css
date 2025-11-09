@@ -206,6 +206,11 @@ body {
 	align-items: center;
 }
 
+.hero-image img {
+	width: 350px;
+	height: auto;
+}
+
 /* Section Styles */
 .section {
 	padding: 5rem 0;
@@ -726,7 +731,7 @@ body {
 
 	.hero-image img {
 		width: 250px;
-		height: 250px;
+		height: auto;
 	}
 
 	.hero-buttons {
@@ -780,7 +785,7 @@ body {
 
 	.hero-image img {
 		width: 200px;
-		height: 200px;
+		height: auto;
 	}
 
 	.btn {
