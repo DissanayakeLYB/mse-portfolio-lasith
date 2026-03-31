@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 	initNavigation();
 	initScrollAnimations();
+	initProjectsCarousel();
 	initContactForm();
 	initSmoothScrolling();
 	addScrollToTop();
@@ -32,10 +33,10 @@ function initNavigation() {
 	window.addEventListener("scroll", function () {
 		const navbar = document.querySelector(".navbar");
 		if (window.scrollY > 100) {
-			navbar.style.background = "rgba(255, 255, 255, 0.98)";
-			navbar.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+			navbar.style.background = "rgba(6, 13, 22, 0.94)";
+			navbar.style.boxShadow = "0 12px 30px rgba(0, 0, 0, 0.35)";
 		} else {
-			navbar.style.background = "rgba(255, 255, 255, 0.95)";
+			navbar.style.background = "rgba(6, 13, 22, 0.78)";
 			navbar.style.boxShadow = "none";
 		}
 	});
@@ -50,7 +51,10 @@ function initNavigation() {
 			const sectionHeight = section.offsetHeight;
 			const sectionId = section.getAttribute("id");
 
-			if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+			if (
+				scrollPos >= sectionTop &&
+				scrollPos < sectionTop + sectionHeight
+			) {
 				navLinks.forEach((link) => {
 					link.classList.remove("active");
 					if (link.getAttribute("href") === `#${sectionId}`) {
@@ -92,6 +96,94 @@ function initScrollAnimations() {
 	});
 }
 
+// Projects carousel functionality
+function initProjectsCarousel() {
+	const carousel = document.querySelector(".projects-carousel");
+	if (!carousel) return;
+
+	const track = carousel.querySelector(".projects-track");
+	const slides = Array.from(track.querySelectorAll(".project-card"));
+	const prevBtn = carousel.querySelector(".carousel-btn.prev");
+	const nextBtn = carousel.querySelector(".carousel-btn.next");
+	const viewport = carousel.querySelector(".projects-viewport");
+	const dotsContainer = document.querySelector(".carousel-dots");
+
+	if (
+		!track ||
+		!slides.length ||
+		!prevBtn ||
+		!nextBtn ||
+		!viewport ||
+		!dotsContainer
+	) {
+		return;
+	}
+
+	let currentIndex = 0;
+	const totalSlides = slides.length;
+	let touchStartX = 0;
+
+	const dots = slides.map((_, index) => {
+		const dot = document.createElement("button");
+		dot.type = "button";
+		dot.className = "carousel-dot";
+		dot.setAttribute("aria-label", `Go to project ${index + 1}`);
+		dot.addEventListener("click", () => goToSlide(index));
+		dotsContainer.appendChild(dot);
+		return dot;
+	});
+
+	function goToSlide(index) {
+		currentIndex = (index + totalSlides) % totalSlides;
+		track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+		dots.forEach((dot, dotIndex) => {
+			dot.classList.toggle("active", dotIndex === currentIndex);
+		});
+
+		slides.forEach((slide, slideIndex) => {
+			slide.setAttribute(
+				"aria-hidden",
+				slideIndex === currentIndex ? "false" : "true",
+			);
+		});
+	}
+
+	prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+	nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+
+	viewport.addEventListener("keydown", (event) => {
+		if (event.key === "ArrowLeft") {
+			event.preventDefault();
+			goToSlide(currentIndex - 1);
+		}
+		if (event.key === "ArrowRight") {
+			event.preventDefault();
+			goToSlide(currentIndex + 1);
+		}
+	});
+
+	viewport.addEventListener(
+		"touchstart",
+		(event) => {
+			touchStartX = event.changedTouches[0].clientX;
+		},
+		{ passive: true },
+	);
+
+	viewport.addEventListener(
+		"touchend",
+		(event) => {
+			const deltaX = event.changedTouches[0].clientX - touchStartX;
+			if (Math.abs(deltaX) < 50) return;
+			goToSlide(currentIndex + (deltaX < 0 ? 1 : -1));
+		},
+		{ passive: true },
+	);
+
+	goToSlide(0);
+}
+
 // Contact form functionality
 function initContactForm() {
 	const contactForm = document.getElementById("contactForm");
@@ -119,14 +211,20 @@ function initContactForm() {
 			}
 
 			// Simulate form submission
-			const submitBtn = contactForm.querySelector('button[type="submit"]');
+			const submitBtn = contactForm.querySelector(
+				'button[type="submit"]',
+			);
 			const originalText = submitBtn.innerHTML;
 
-			submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+			submitBtn.innerHTML =
+				'<i class="fas fa-spinner fa-spin"></i> Sending...';
 			submitBtn.disabled = true;
 
 			setTimeout(() => {
-				showNotification("Thank you! Your message has been sent successfully.", "success");
+				showNotification(
+					"Thank you! Your message has been sent successfully.",
+					"success",
+				);
 				contactForm.reset();
 				submitBtn.innerHTML = originalText;
 				submitBtn.disabled = false;
