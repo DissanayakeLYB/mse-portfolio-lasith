@@ -26,7 +26,7 @@ const skillGroups = [
 
 const SkillsSection: React.FC = () => {
   return (
-    <section className="bg-surface px-5 sm:px-8 md:px-10 lg:px-16 py-20 sm:py-24 md:py-32">
+    <section className="bg-surface border-t border-[#1e1e24] px-5 sm:px-8 md:px-10 lg:px-16 py-24 sm:py-32 md:py-40">
       <div className="max-w-5xl mx-auto">
         <FadeIn delay={0} y={30}>
           <h2

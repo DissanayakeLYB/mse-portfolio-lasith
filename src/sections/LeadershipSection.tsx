@@ -26,7 +26,7 @@ const activities = [
 
 const LeadershipSection: React.FC = () => {
   return (
-    <section className="bg-surface rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 relative z-10 px-5 sm:px-8 md:px-10 lg:px-16 py-20 sm:py-24 md:py-32">
+    <section className="bg-surface border-t border-[#1e1e24] px-5 sm:px-8 md:px-10 lg:px-16 py-24 sm:py-32 md:py-40">
       <div className="max-w-5xl mx-auto">
         <FadeIn delay={0} y={30}>
           <h2
