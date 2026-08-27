@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Atom,
-  Hexagon,
-  Grid3x3,
-  Magnet as MagnetIcon,
-} from "lucide-react";
 import FadeIn from "../components/FadeIn";
-import ContactButton from "../components/ContactButton";
 import AnimatedText from "../components/AnimatedText";
 
 const aboutText =
@@ -15,64 +8,21 @@ const aboutText =
 const experiences = [
   {
     title: "Research Assistant",
-    date: "06/2026 – Present",
-    org: "Department of Materials Science and Engineering, University of Moratuwa",
-    items: [
-      "Conducting computational research on targeted cancer therapy",
-      "Developing multiphysics simulations using COMSOL Multiphysics",
-      "Designing and optimizing magnetoelectric nanocarrier architectures",
-    ],
+    date: "2026",
+    org: "DMSE, University of Moratuwa",
+    current: true,
   },
   {
     title: "Temporary Instructor",
-    date: "08/2025 – 05/2026",
-    org: "Department of Materials Science and Engineering, University of Moratuwa",
-    items: [
-      "Facilitated practical sessions and laboratory experiments",
-      "Provided academic support and mentorship for coursework",
-      "Assisted academic staff with contribution for ongoing projects",
-    ],
+    date: "2025 – 2026",
+    org: "DMSE, University of Moratuwa",
+    current: false,
   },
   {
     title: "R&D Intern",
-    date: "11/2023 – 05/2024",
-    org: "Michelin Lanka (Pvt) Ltd – Casting Product Division",
-    items: [
-      "Experienced in Casting Manufacturing Practices and Procedures",
-      "Participated in Training sessions and Managerial Meetings",
-      "Conducted Waste (Fine Dust) Reduction projects",
-    ],
-  },
-];
-
-const decorations = [
-  {
-    Icon: Atom,
-    position: "top-[4%] left-[1%] sm:left-[2%] md:left-[4%]",
-    size: "w-[120px] sm:w-[160px] md:w-[210px]",
-    delay: 0.1,
-    x: -80,
-  },
-  {
-    Icon: Grid3x3,
-    position: "bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%]",
-    size: "w-[100px] sm:w-[140px] md:w-[180px]",
-    delay: 0.25,
-    x: -80,
-  },
-  {
-    Icon: Hexagon,
-    position: "top-[4%] right-[1%] sm:right-[2%] md:right-[4%]",
-    size: "w-[120px] sm:w-[160px] md:w-[210px]",
-    delay: 0.15,
-    x: 80,
-  },
-  {
-    Icon: MagnetIcon,
-    position: "bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%]",
-    size: "w-[130px] sm:w-[170px] md:w-[220px]",
-    delay: 0.3,
-    x: 80,
+    date: "2023 – 2024",
+    org: "Michelin Lanka – Casting Product Division",
+    current: false,
   },
 ];
 
@@ -82,18 +32,6 @@ const AboutSection: React.FC = () => {
       id="about"
       className="min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 lg:px-16 py-20 relative"
     >
-      {/* Decorative icons — very subtle */}
-      {decorations.map(({ Icon, position, size, delay, x }, i) => (
-        <div
-          key={i}
-          className={`absolute ${position} ${size} text-[#27272f]`}
-        >
-          <FadeIn delay={delay} x={x} y={0} duration={0.9}>
-            <Icon className="w-full h-full" strokeWidth={0.75} />
-          </FadeIn>
-        </div>
-      ))}
-
       {/* Heading */}
       <FadeIn delay={0} y={40}>
         <h2
@@ -117,16 +55,13 @@ const AboutSection: React.FC = () => {
         }}
       />
 
-      {/* Contact button */}
-      <ContactButton />
-
-      {/* Professional Experience */}
-      <div className="w-full max-w-5xl mt-20 sm:mt-28 md:mt-36">
+      {/* Experience — editorial two-column */}
+      <div className="w-full max-w-4xl mt-8 sm:mt-12 md:mt-16">
         <FadeIn delay={0} y={30}>
           <h2
-            className="font-black text-[#f4f4f5] uppercase leading-none tracking-[-0.03em] mb-12 sm:mb-16"
+            className="font-black text-[#f4f4f5] uppercase leading-none tracking-[-0.03em] mb-10 sm:mb-14"
             style={{
-              fontSize: "clamp(2.5rem, 8vw, 90px)",
+              fontSize: "clamp(2.2rem, 7vw, 80px)",
               fontFamily: "'Kanit', sans-serif",
             }}
           >
@@ -134,23 +69,17 @@ const AboutSection: React.FC = () => {
           </h2>
         </FadeIn>
 
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col">
           {experiences.map((exp, i) => (
             <FadeIn key={i} delay={i * 0.1}>
-              <div className="relative pl-8 border-l border-[#27272f]">
-                {/* Timeline dot — gold accent */}
-                <div className="absolute -left-[5px] top-[6px] w-[10px] h-[10px] rounded-full bg-[#c9a84c]/70 shadow-[0_0_0_4px_rgba(201,168,76,0.08)]" />
-
-                <div className="flex flex-wrap justify-between items-baseline gap-x-6 gap-y-1">
-                  <h3
-                    className="text-[#e4e4e7] font-medium"
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: "clamp(1.05rem, 2vw, 1.25rem)",
-                    }}
-                  >
-                    {exp.title}
-                  </h3>
+              <div className="group flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-0 py-5 sm:py-6 border-b border-[#1e1e24] last:border-b-0">
+                {/* Date column */}
+                <div className="sm:w-36 md:w-44 flex-shrink-0 flex items-center gap-2.5">
+                  <div
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      exp.current ? "bg-[#c9a84c]" : "bg-[#27272f]"
+                    }`}
+                  />
                   <span
                     className="text-[#52525b] whitespace-nowrap"
                     style={{
@@ -161,30 +90,28 @@ const AboutSection: React.FC = () => {
                     {exp.date}
                   </span>
                 </div>
-                <p
-                  className="text-[#c9a84c]/70 font-medium mt-1 mb-3"
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: "clamp(0.82rem, 1.3vw, 0.92rem)",
-                  }}
-                >
-                  {exp.org}
-                </p>
-                <ul className="flex flex-col gap-1.5">
-                  {exp.items.map((item, j) => (
-                    <li
-                      key={j}
-                      className="text-[#71717a] relative pl-4"
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: "clamp(0.82rem, 1.3vw, 0.92rem)",
-                      }}
-                    >
-                      <span className="absolute left-0 text-[#c9a84c]/50">—</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+
+                {/* Role column */}
+                <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
+                  <h3
+                    className="text-[#e4e4e7] font-medium"
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+                    }}
+                  >
+                    {exp.title}
+                  </h3>
+                  <span
+                    className="text-[#c9a84c]/40"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: "clamp(0.78rem, 1.1vw, 0.88rem)",
+                    }}
+                  >
+                    — {exp.org}
+                  </span>
+                </div>
               </div>
             </FadeIn>
           ))}
