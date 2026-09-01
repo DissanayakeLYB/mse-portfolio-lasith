@@ -32,7 +32,7 @@ const HeroSection: React.FC = () => {
 
       {/* Main Content — Name, Title, Portrait */}
       <div className="flex-1 flex items-center px-6 md:px-10 lg:px-16 w-full">
-        <div className="max-w-[1400px] w-full mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-10 md:gap-16 pt-10 md:pt-0">
+        <div className="max-w-[1400px] w-full mx-auto flex flex-col items-center justify-center gap-10 md:gap-16 pt-10 md:pt-0">
           {/* Left — Name & Credentials */}
           <div className="flex flex-col gap-5 md:gap-7 flex-1 min-w-0">
             <FadeIn delay={0.1} y={30}>
@@ -115,20 +115,6 @@ const HeroSection: React.FC = () => {
             </FadeIn>
           </div>
 
-          {/* Right — Portrait */}
-          <FadeIn delay={0.3} y={40}>
-            <div className="relative flex-shrink-0">
-              {/* Subtle ring accent */}
-              <div className="absolute inset-0 rounded-full border border-[#c9a84c]/10 scale-[1.08]" />
-              <div className="w-[220px] sm:w-[280px] md:w-[340px] lg:w-[400px] aspect-square rounded-full overflow-hidden border border-[#27272f]">
-                <img
-                  src="/images/profile.png"
-                  alt="Lasith Dissanayake — Materials Science Engineer"
-                  className="w-full h-full object-cover grayscale-[30%] contrast-[1.05] brightness-[0.95]"
-                />
-              </div>
-            </div>
-          </FadeIn>
         </div>
       </div>
 

@@ -259,22 +259,6 @@ a {
 	transform: translateY(-2px);
 }
 
-.hero-image {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-}
-
-.hero-image img {
-	width: min(360px, 90%);
-	height: auto;
-	border-radius: 48% 48% 44% 44%;
-	border: 2px solid rgba(90, 210, 255, 0.4);
-	box-shadow: var(--shadow-xl);
-	position: relative;
-	z-index: 1;
-}
 
 /* Section Styles */
 .section {
@@ -864,9 +848,6 @@ a {
 		padding: 2.6rem;
 	}
 
-	.hero-image {
-		order: -1;
-	}
 
 	.projects-track .project-card {
 		grid-template-columns: 1fr;
